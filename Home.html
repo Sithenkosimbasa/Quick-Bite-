@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickBite | Ready-to-Eat Office Meals</title>
+  <link rel="stylesheet" href="Style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<header class="navbar">
+  <img src="images/QBLOGO2.jpeg" class="logo" alt="QuickBite" />
+  <nav>
+    <a href="#explore">Explore</a>
+    <a href="#how">How</a>
+    <a href="#deals">Deals</a>
+    <a href="#errands">Errands</a>
+    <a href="#order" class="cta">Order</a>
+    <button id="chatBtn" class="chat-btn" onclick="openChatbot()"><i class="fas fa-robot"></i> AI Assistant</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="video-background">
+    <video id="heroVideo" autoplay muted loop playsinline poster="images/akhni.png">
+      <source src="images/QB Mascort.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Overlay Logo -->
+  <img src="images/QBLOGO2.jpeg" class="video-logo" alt="QuickBite" />
+
+  <button id="muteBtn" class="mute-toggle" onclick="toggleHeroAudio()">
+    🔇
+  </button>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1>Explore Our Restaurants</h1>
+    <p>Discover unique flavours, menus, and prices from our partner kitchens.</p>
+    <button class="cta-btn" onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})">Start Exploring</button>
+  </div>
+</section>
+
+<section id="explore" class="section">
+  <h2>Explore Our Restaurants</h2>
+  <div class="restaurant-selector">
+    <div class="restaurant-card selected" data-restaurant="she-ate">
+      <img src="images/She ate logo 2 high res.png" class="restaurant-icon" alt="She Ate" />
+      <div class="restaurant-name">She Ate</div>
+    </div>
+    <div class="restaurant-card" data-restaurant="oumas">
+      <div class="restaurant-icon">🍲</div>
+      <div class="restaurant-name">Ouma's</div>
+    </div>
+    <div class="restaurant-card" data-restaurant="nibbly-bits">
+      <div class="restaurant-icon">🍟</div>
+      <div class="restaurant-name">Nibbly Bits</div>
+    </div>
+  </div>
+  <div class="menu-grid" id="menuGrid" style="display: none;">
+
+    <!-- Menu items will be populated by JavaScript -->
+
+  </div>
+</section>
+
+<section id="deals" class="section alt">
+  <h2>Office Deals & Loyalty</h2>
+  <div class="menu-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+    <div class="card"><h3>Bulk Discount</h3><p>10% off office orders</p></div>
+    <div class="card"><h3>Loyalty Card</h3><p>Every 5th meal discounted</p></div>
+    <div class="card"><h3>Specials</h3><p>Weekly rotating treats</p></div>
+  </div>
+</section>
+
+<section id="errands" class="section">
+  <h2>Quick Errands</h2>
+  <p>Need coffee, stationery, or something urgent?</p>
+  <button class="cta-btn" onclick="openErrand()" style="margin-top:20px; background: var(--green);">Request Errand</button>
+</section>
+
+<footer>
+  <p>QuickBite © 2026 | NSZ GROUP2025</p>
+</footer>
+
+<div id="orderModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 style="color: var(--orange); margin-bottom: 20px;">Place Your Order</h2>
+    <form id="orderForm">
+      <input type="hidden" id="item">
+      <input type="hidden" id="restaurant" value="She Ate">
+      
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Your Name" required>
+      
+      <label for="contact">WhatsApp Number:</label>
+      <input type="tel" id="contact" placeholder="012 345 6789" required>
+      
+      <div style="display: flex; gap: 15px;">
+        <div style="flex: 2;">
+          <label for="portion">Portion:</label>
+          <select id="portion">
+            <option value="Regular">Regular</option>
+            <option value="Large">Large (+R15)</option>
+          </select>
+        </div>
+        <div style="flex: 1;">
+          <label for="quantity">Qty:</label>
+          <input type="number" id="quantity" value="1" min="1">
+        </div>
+      </div>
+
+      <label for="address">Office Address:</label>
+      <input type="text" id="address" placeholder="Building & Floor No." required>
+      
+      <button type="submit" class="submit-btn">Send via WhatsApp</button>
+    </form>
+  </div>
+</div>
+
+<!-- Chatbot Modal -->
+<div id="chatModal" class="modal">
+  <div class="modal-content chat-modal">
+    <span class="close" onclick="closeChatbot()">&times;</span>
+    <h2 style="color: var(--orange); margin-bottom: 20px;"><i class="fas fa-robot"></i> QuickBite AI Assistant</h2>
+    <div id="chatMessages" class="chat-messages">
+      <div class="message bot-message">
+        <div class="message-avatar"><i class="fas fa-robot"></i></div>
+        <div class="message-content">Hi! I'm your QuickBite AI assistant. I can help you place an order, answer questions about our menu, or assist with anything else. How can I help you today?</div>
+      </div>
+    </div>
+    <div class="chat-input-container">
+      <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeyPress(event)">
+      <button onclick="sendChatMessage()" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+</div>
+
+<script src="javascript.js"></script>
+</body>
+</html>
